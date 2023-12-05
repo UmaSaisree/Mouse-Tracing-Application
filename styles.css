@@ -1,0 +1,110 @@
+body{
+  background: linear-gradient(to left top,rgba(0, 48, 135, 0.567),rgba(250, 71, 22, 0.812));
+  min-height: 100vh;
+  font-family: "Times New Roman", Times, serif;
+  color : black;
+  
+}
+#gameArea {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#target {
+  position: absolute;
+  cursor: crosshair;
+}
+
+#score {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: red;
+  font-size: 24px;
+}
+
+h1 {
+  font-size: 50px!important;
+}
+.col{
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 2px;
+  padding: 10px;
+  border-color: black;
+  box-shadow: 0 6px 20px rgba(0, 0, 0,.3);
+  border-radius: 10px;
+}
+
+.white { background-color: white; }
+.lemyellow { background-color: #ffff99;}
+.lightblue {background-color: #80bfff;}
+.lightgreen {background-color: #8cd98c; }
+.black {background-color: black;}
+.maroon {background-color: #b30000;}
+.peach {background-color: #ff6666;}
+.red { background-color: red; }
+.blue { background-color: #0d3483; }
+.darkgreen { background-color: #264d00; }
+.yellow { background-color: yellow; }
+.purple { background-color: purple; }
+.orange { background-color: orange; }
+
+.circle {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  transition: border 0.3s ease;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+
+input[type="radio"]:checked + label {
+  border: 3px solid white;
+} 
+
+#plus{
+  font-size: 30px;
+  margin : 5px;
+}
+
+#pointer{
+  font-size: 30px;
+  margin: 5px;
+}
+
+#gameScreen {
+  display: none;
+  width: 100%;
+  height: 80vh;
+  border-style: solid;
+
+}
+#game{
+  display: none;
+}
+
+.custom-input {
+    color: black; /* Text color */
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid black; /* Border color */
+    border-radius: 10px;
+    width: auto;
+    padding: 5px;
+}
+
+.custom-input::placeholder {
+    color: rgba(255, 255, 255, 0.3); /* Placeholder text color */
+}
+
+.custom-input:focus {
+    border-color: #4a90e2; /* Color of border on focus */
+    outline: none; /* Removes the default focus outline, optional */
+}
