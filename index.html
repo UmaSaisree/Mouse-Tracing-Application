@@ -18,7 +18,7 @@
   <div class="container">
     <div class="row">
         <div class="col-10">
-            <h1>Mouse Tracking Test</h1>
+            <h1 id="heading" style="text-align: center;">Mouse Tracking Test</h1>
         </div>
         <div class="col-2">
             <div id = "timeLeft" class="timer" style="font-size: 30px; text-align: right; margin-top: 15px;"></div>
@@ -26,13 +26,22 @@
     </div>
   </div>
   <div class="container" id="menu">
+    <!--
     <label for="name">Name : </label>
-    <input type="text" id="name" class="custom-input" ><br><br>
+    <input type="text" id="name" class="custom-input" ><br><br>-->
     <label for="code">Code : </label>
-    <input type="text" id="code" class="custom-input"><br><br>
+    <br><br>
+    <div class="input-group input-group-lg"> 
+      <input type="text" id="code" class="form-control" aria-describedby="inputGroup-sizing-lg" placeholder="Enter code">
+  </div>
+  <br><br>
     <label for="date">Date : </label>
-    <input type="date" id="date" class="custom-input"><br><br>
-    <div class="container">
+    <br><br>
+    <div class="input-group input-group-lg">
+      <input type="date" id="date" class="form-control" aria-describedby="inputGroup-sizing-lg">
+  </div>
+  <br><br>
+    <div class="container" style="display: none;">
         <div class="row">
             <div class="col">
                 <h3>Background Color</h3>
@@ -123,7 +132,7 @@
                 <hr>
                 <div class="mb-3">
                   
-                  <input type="number" class="custom-input" id="duration" name="duration" value="4.0" min="0.5" max="4.0" step="0.5">
+                  <input type="number" class="custom-input" id="duration" name="duration" value="0.5" min="0.5" max="4.0" step="0.5">
                   <label for="duration" class="form-label">Minutes</label>
               </div>
                 
@@ -134,49 +143,90 @@
     </div>
     <br>
   </div>
-  <div class = "container">
-    <button type="button" id="startButton" class="btn btn-success">Start Game</button>
-  </div>
-  <div class="container" id="instructions1" style = "display: none;">
-    <pre> 
+
+
+  <div class="container" id="instructions0">
+    <h2 style="text-align: center;">Instructions</h2>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
+        During this task,you will see black dots appear randomly on the screen. Your goal is to click on as many of these black dots as possible 
+        while also counting backward by 3 (series 1), then 7 (series 2), then 17 (series 3) from the numbers provided by the study coordinator. Please make
+        sure to maintain counting as you click on the dots. Each series will last for 4 minutes. You will have a 90 second break between each series.
+        
+        Once you have read and understand the directions click next.
+
+    </p>
+</div>
+
+<div class="container" id="instructions1">
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         In Series 1 you will be counting back by 3 from the number given to you by the study coordinator.
-
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         Example - 100, 97, 94, 91...
-
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         Please confirm what the number you will be counting back from is with the coordinator.
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
+        When you're ready, please click "Start". Your voice will start recording and the test will begin in 3 
+        seconds. 
+    </p>
+    <br>
+</div>
 
-        When you're ready, please click "START". Your voice will start recording and the test will begin in 3 seconds. 
-
-    </pre>
-  </div>
-
-  <div class="container" id="instructions2" style = "display: none;">
-    <pre> 
+<div class="container" id="instructions2">
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         In Series 2 you will be counting back by 7 from the number given to you by the study coordinator.
-
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         Example - 100, 93, 86, 79...
-
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         Please confirm what the number you will be counting back from is with the coordinator.
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
+        When you're ready, please click "Start". Your voice will start recording and the test will begin in 3 seconds. 
+    </p>
+</div>
 
-        When you're ready, please click "START". Your voice will start recording and the test will begin in 3 seconds. 
-
-    </pre>
-  </div>
-
-  <div class="container" id="instructions3" style = "display: none;">
-    <pre> 
+<div class="container" id="instructions3">
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         In Series 3 you will be counting back by 17 from the number given to you by the study coordinator.
-
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         Example - 100, 87, 74, 57...
-
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
         Please confirm what the number you will be counting back from is with the coordinator.
-
-        When you're ready, please click "START". Your voice will start recording and the test will begin in 3 seconds. 
-
-    </pre>
-  </div>
+    </p>
+    <br>
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif;"> 
+        When you're ready, please click "Start". Your voice will start recording and the test will begin in 3 seconds. 
+    </p>
+</div>
+  
   
   <p id="countdown" style="text-align: center; font-size: 50px;"></p>
+
+  <div class="container" id="break1">
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif; text-align: center;">
+        You have 90-second break before the second series.
+    </p>
+</div>
+
+<div class="container" id="break2">
+    <p style="font-size: x-large; font-family: Verdana, Geneva, Tahoma, sans-serif; text-align: center;">
+        You have 90-second break before the third series.
+    </p>
+</div>
   
   <div id="gameScreen" class="container" style = "display: none;">
     <div id="game">
@@ -186,7 +236,11 @@
 
   <p id="ending" style="text-align: center; font-size: 50px;"></p>
 
-  <div id="resultContainer" class="container" style="display: none;">
+  <div id="finish" class="container">
+    <p style="font-size: xx-large; font-family: Verdana, Geneva, Tahoma, sans-serif;">You have completed the test.</p>
+</div>
+
+  <!-- <div id="resultContainer" class="container" style="display: none;">
     <div class="row">
       <div class="col">
         <h3> Session 1 Scores</h3>
@@ -212,14 +266,19 @@
           
           
       </div>
-  </div>
+  </div> -->
 
-<div class="container">
-    <button id="restartButton" style="display: none;" class="btn btn-success">Restart</button>
+
+  <div class="container d-flex justify-content-center">
+    <button id="next1" class="btn btn-success btn-lg">Next</button>
 </div>
-<br>
-<div class="container">
-    <button id="save" class="btn btn-success" style="display: none;">Save To Excel</button>
+
+<div class="container d-flex justify-content-center">
+    <button id="start" class="btn btn-success btn-lg">Start</button>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <button id="save" class="btn btn-success btn-lg">Finish</button>
 </div>
 
 </body>

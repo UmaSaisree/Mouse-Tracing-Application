@@ -1,10 +1,19 @@
 body{
-  background: linear-gradient(to left top,rgba(0, 48, 135, 0.567),rgba(250, 71, 22, 0.812));
   min-height: 100vh;
   font-family: "Times New Roman", Times, serif;
   color : black;
   
 }
+
+h1 {
+  font-size: 50px!important;
+}
+.col{
+  background-color: gray;
+  margin: 2px;
+  border-color: black;
+}
+
 #gameArea {
   position: relative;
   width: 100vw;
@@ -24,17 +33,7 @@ body{
   font-size: 24px;
 }
 
-h1 {
-  font-size: 50px!important;
-}
-.col{
-  background-color: rgba(255, 255, 255, 0.3);
-  margin: 2px;
-  padding: 10px;
-  border-color: black;
-  box-shadow: 0 6px 20px rgba(0, 0, 0,.3);
-  border-radius: 10px;
-}
+
 
 .white { background-color: white; }
 .lemyellow { background-color: #ffff99;}
@@ -108,3 +107,95 @@ input[type="radio"]:checked + label {
     border-color: #4a90e2; /* Color of border on focus */
     outline: none; /* Removes the default focus outline, optional */
 }
+
+#game{
+  display: none;
+}
+
+#ending{
+  display: none;
+}
+
+#break1{
+  display: none;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#finish{
+  display: none;
+  padding-top: 20%;
+ text-align: center;
+}
+
+#break2{
+  display: none;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#countdown{
+  display: none;
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+
+}
+
+#instructions0{
+  display: none;
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#instructions1{
+  display: none;
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#instructions2{
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+  display: none;
+}
+
+#instructions3{
+  display: none;
+  padding-top: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#resultContainer {
+  display: none;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  display: inline;
+}
+
+#countdown {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#restart{
+  display:none;
+}
+
+#start{
+  display: none;
+}
+
+#save{
+  display:none;
+}
+
+

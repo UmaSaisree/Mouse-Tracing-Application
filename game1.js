@@ -2,18 +2,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const canvas = document.querySelector('#canvas');
     const ctx = canvas.getContext('2d');
-
-    const startButton = document.getElementById("startButton");
-    const restartButton = document.getElementById("restartButton");
+    const headingElement = document.getElementById("heading");
+    const startButton = document.getElementById("start");
+    const next1Button = document.getElementById("next1");
     const codeElement = document.getElementById("code");
     const saveButton = document.getElementById("save");
     const menuContainer = document.getElementById("menu");
+    const finishMessage = document.getElementById("finish");
     const gameScreenContainer = document.getElementById("gameScreen");
     const gameContainer = document.getElementById("game");
+    const instructionsContainer0 = document.getElementById("instructions0");
     const instructionsContainer1 = document.getElementById("instructions1");
     const instructionsContainer2 = document.getElementById("instructions2");
     const instructionsContainer3 = document.getElementById("instructions3");
-    const resultsContainer = document.getElementById("resultContainer");
+    const breakContainer1 = document.getElementById("break1");
+    const breakContainer2 = document.getElementById("break2");
     const countdownElement = document.getElementById("countdown");
     const targetColorInput = document.getElementsByName("tgtcolor");
     const bgColorInput = document.getElementsByName("bgcolor");
@@ -28,10 +31,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let bgColor = "";
     let isGameActive = false;
     let score = 0;
+    let score1 = 0;
+    let score2 = 0;
+    let score3 = 0;
     let code;
     let series = 0;
     let difficulty;
     let targetSize;
+    let first = 0;
 
     var animationFrameId;
     var distances = [];
@@ -82,15 +89,36 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }
+    
 
-    startButton.addEventListener('click', function(event) {
-        startButton.style.display = "none";
+    next1Button.addEventListener('click', function(event){
+        code = codeElement.value;
+        // targetSize = targetSize*parseInt(targetSizeInput.value);
+        
         menuContainer.style.display = "none";
+        headingElement.style.display = "none";
+        if(first == 0)
+        instructionsContainer0.style.display = "block";
+        else if(first == 1){
+            next1Button.style.display = "none";
+            instructionsContainer0.style.display = "none";
+            instructionsContainer1.style.display = "block";
+            startButton.style.display = "block";
+        }
+        
+        first+=1
+
+    })
+
+    startButton.addEventListener('click', function(event) { 
+
+        startButton.style.display = "none";
+        instructionsContainer0.style.display = "none";
         instructionsContainer1.style.display = "none";
         instructionsContainer2.style.display = "none";
         instructionsContainer3.style.display = "none";
-        startGame(series); // call startGame with the initial round number
-        series += 1; 
+        series += 1;
+        startGame(series);  // call startGame with the initial round number
     });
 
     document.getElementById('difficultyDropdown').addEventListener('click', function(event) {
@@ -109,18 +137,18 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    restartButton.addEventListener('click', function(event) {
-        location.reload();
-    });
 
     function startGame(i = 1){
-        if(i==0){
-            instructionsContainer1.style.display = "block";
-            startButton.style.display = "block";
-        }
-        else{
+        menuContainer.style.display = "none";
+        headingElement.style.display = "none";
         startCountdown(3, i);
-        }
+        // if(i==0){
+        //     instructionsContainer1.style.display = "block";
+        //     startButton.style.display = "block";
+        // }
+        // else{
+        // startCountdown(3, i);
+        // }
     }
 
     function startCountdown(seconds, iteration) {
@@ -132,14 +160,17 @@ document.addEventListener("DOMContentLoaded", function() {
             if (seconds <= 0) {
                 clearInterval(countdownInterval);
                 countdownElement.style.display = "none";
+                endingElement.style.display = "none";
                 if (given == 3)
                 beginGame(iteration);
                 else {
                     if(iteration==2){
-                    instructionsContainer2.style.display = "block";
-                    startButton.style.display = "block";
+                        breakContainer1.style.display = "none";
+                        instructionsContainer2.style.display = "block";
+                        startButton.style.display = "block";
                    }
                    else{
+                    breakContainer2.style.display = "none";
                     instructionsContainer3.style.display = "block";
                     startButton.style.display = "block";
                    }
@@ -160,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
         bgColor = getSelectedValue(bgColorInput);
         gameScreenContainer.style.cursor = cursorTypeValue;
         gameScreenContainer.style.backgroundColor = bgColor;
+        start.style.display = "none";
         targetColor = getSelectedValue(targetColorInput);
         isGameActive = true;
         //const difficultyLevel = parseFloat(difficultyLevelInput.value);
@@ -321,13 +353,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function updateStats(iteration) {
         if(iteration==1){
-            document.getElementById('score1').textContent = 100 - score;
+            score1 = 100 - score;
         }
         else if(iteration==2){
-            document.getElementById('score2').textContent = 100 - score;
+            score2 = 100 - score;
         }
         else if(iteration==3){
-            document.getElementById('score3').textContent = 100 - score;
+            score3 = 100 - score;
         }
     }
     
@@ -347,16 +379,17 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.style.cursor = "auto";
         updateStats(iteration);
         if (iteration < 3){
-            startCountdown(90, iteration+1);
+            if (iteration == 1)
+            breakContainer1.style.display = "block";
+            else if (iteration == 2)
+            breakContainer2.style.display = "block";
+            startCountdown(10, iteration+1); //break duration debugging
         }
         else{
             setTimeout(() => {
-                restartButton.style.display = "block";
                 saveButton.style.display = "block";
             }, 1000);
-             
-             resultsContainer.style.display="block";
-
+            finishMessage.style.display = "block"; 
         }
         
     }
