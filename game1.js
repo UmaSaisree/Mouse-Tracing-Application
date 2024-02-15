@@ -57,18 +57,32 @@ document.addEventListener("DOMContentLoaded", function() {
           this.vely = 0;
           this.posx = x;
           this.posy = y;
-          this.color = getnowcolor(color);
+          //this.color = getnowcolor(color);
           this.currentColor = "black";
           this.targetX = randomPoint("x");
           this.targetY = randomPoint("y");
         }
         draw(newx, newy){
-          this.posx = newx;
-          this.posy = newy;
-          ctx.beginPath();
-          ctx.arc(this.posx, this.posy, 10, 0, 2 * Math.PI); // Circle with radius 5
-          ctx.fillStyle = this.currentColor;
-          ctx.fill();
+            this.posx = newx;
+            this.posy = newy;
+
+    // Outer circle (Red)
+            ctx.beginPath();
+            ctx.arc(this.posx, this.posy, 30, 0, 2 * Math.PI); // Outer circle with larger radius
+            ctx.fillStyle = 'red'; // Outer circle color
+            ctx.fill();
+
+    // Inner circle (Black)
+            ctx.beginPath();
+            ctx.arc(this.posx, this.posy, 5, 0, 2 * Math.PI); // Inner circle with smaller radius
+            ctx.fillStyle = 'black'; // Inner circle color
+            ctx.fill();
+        //   this.posx = newx;
+        //   this.posy = newy;
+        //   ctx.beginPath();
+        //   ctx.arc(this.posx, this.posy, 30, 0, 2 * Math.PI); // Circle with radius 
+        //   ctx.fillStyle = this.currentColor;
+        //   ctx.fill();
         }
     }
       
@@ -84,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
               ctx.lineWidth = 3;
               ctx.moveTo(this.paths[i-1].x, this.paths[i-1].y);
               ctx.lineTo(this.paths[i].x, this.paths[i].y);
-              ctx.strokeStyle = getnowcolor(this.color, i/150);
+              ctx.strokeStyle = getnowcolor('red', i/2); //path Length
               ctx.stroke();
             }
         }
@@ -226,8 +240,8 @@ document.addEventListener("DOMContentLoaded", function() {
     
     function init(){
         fixdim();
-        var color = Math.floor((Math.random() * 255) + 1);
-        worm = new Worm(Math.floor((Math.random() * window.innerWidth) + 1),Math.floor((Math.random() * window.innerHeight) + 1));
+        var color = 'red';
+        worm = new Worm(Math.floor(Math.random() * (canvas.width - 30) + 5),Math.floor(Math.random() * (canvas.height - 30) + 5));
         worm.currentColor = targetColor;
         path = new Path(color);
     
@@ -240,12 +254,20 @@ document.addEventListener("DOMContentLoaded", function() {
       
         goToTarget(worm);    
         worm.draw(worm.posx + worm.velx, worm.posy + worm.vely);
-          
-        if(Math.abs(worm.posx - worm.targetX) <= 2 && Math.abs(worm.posy - worm.targetY) <= 2){
+
+        // if () { // 5% chance to change target each frame
+        //     worm.targetX = randomPoint("x");
+        //     worm.targetY = randomPoint("y");
+        // }
+        var x = Math.random()
+        console.log(x)
+        // (Math.abs(worm.posx - worm.targetX) <= 10 && Math.abs(worm.posy - worm.targetY) <= 10)
+        // x < 0.05
+        if(x < 0.1 || (Math.abs(worm.posx - worm.targetX) <= 1 && Math.abs(worm.posy - worm.targetY) <= 1)){
             worm.targetX = randomPoint("x");
             worm.targetY = randomPoint("y");
-            ctx.fillRect(worm.targetX, worm.targetY, 5, 5);
-            ctx.fillStyle = worm.color;
+            // ctx.fillRect(worm.targetX, worm.targetY, 30, 30); //radius
+            // ctx.fillStyle = worm.color;
         }
           
         if(cicle == 2){
@@ -254,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function() {
           
         path.update();
           
-        if(path.paths.length > 150){
+        if(path.paths.length > 1){  //path length
             path.paths.shift();
         }
       
@@ -278,33 +300,56 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function goToTarget(worm){
 
-        worm.posx = Math.max(0, Math.min(worm.posx + worm.velx, canvas.width));
-        worm.posy = Math.max(0, Math.min(worm.posy + worm.vely, canvas.height));
+        const distanceX = worm.targetX - worm.posx;
+        const distanceY = worm.targetY - worm.posy;
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+    // Adjust velocity based on distance
+    const speed = Math.min(3, distance / 10); // Example: cap speed and scale
+    worm.velx = (distanceX / distance) * speed;
+    worm.vely = (distanceY / distance) * speed;
+
+    // Update position
+    // worm.posx = Math.max(0, Math.min(worm.posx + worm.velx, canvas.width));
+    // worm.posy = Math.max(0, Math.min(worm.posy + worm.vely, canvas.height));
+
+    //     worm.posx = Math.max(0, Math.min(worm.posx + worm.velx, canvas.width));
+    //     worm.posy = Math.max(0, Math.min(worm.posy + worm.vely, canvas.height));
+
+    // //     var angle = Math.atan2(worm.posy, worm.posx);
+
+    // // // Move the worm towards the target
+    // //     worm.velx = Math.cos(angle);
+    // //     worm.vely = Math.sin(angle);
+
+    // //     worm.posx += worm.velx;
+    // //     worm.posy += worm.vely;
+    
         
-        // worm.velx = (worm.targetX > worm.posx) ? 2 : (worm.targetX < worm.posx) ? -2 : 0;
-        // worm.vely = (worm.targetY > worm.posy) ? 2 : (worm.targetY < worm.posy) ? -2 : 0;
+    //     // worm.velx = (worm.targetX > worm.posx) ? 2 : (worm.targetX < worm.posx) ? -2 : 0;
+    //     // worm.vely = (worm.targetY > worm.posy) ? 2 : (worm.targetY < worm.posy) ? -2 : 0;
 
         
-        if(worm.targetX > worm.posx){
-          worm.velx = 1;
-        }else if(Math.abs(worm.posx - worm.targetX) <= 2){
-          worm.velx = 0;
-        }else{
-          worm.velx = -1;
-        }
+    //     if(worm.targetX > worm.posx){
+    //       worm.velx = 1;
+    //     }else if(Math.abs(worm.posx - worm.targetX) <= 2){
+    //       worm.velx = 0;
+    //     }else{
+    //       worm.velx = -1;
+    //     }
         
-        if(worm.targetY > worm.posy){
-          worm.vely = 1;
-        }else if(Math.abs(worm.posy - worm.targetY) <= 2){
-          worm.vely = 0;
-        }else{
-          worm.vely = -1;
-        }
+    //     if(worm.targetY > worm.posy){
+    //       worm.vely = 1;
+    //     }else if(Math.abs(worm.posy - worm.targetY) <= 2){
+    //       worm.vely = 0;
+    //     }else{
+    //       worm.vely = -1;
+    //     }
     }
       
     function randomPoint(what){
-        var rx = Math.floor(Math.random() * (canvas.width - 10) + 5); 
-        var ry = Math.floor(Math.random() * (canvas.height - 10) + 5);
+        var rx = Math.floor(Math.random() * (canvas.width - 30) + 5); 
+        var ry = Math.floor(Math.random() * (canvas.height - 30) + 5);
         return (what == "x") ? rx : ry;
     }
       
@@ -326,10 +371,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (scoreUpdateCount >= 60) {
             var minuteAverage = distances.reduce((a, b) => a + b, 0) / distances.length;
-            console.log(minuteAverage);
+            //console.log(minuteAverage);
             var scaledScore = (minuteAverage/8) 
             score = (score + scaledScore)/2// Update score with the average
-            console.log(score);
+            //console.log(score);
             distances = []; // Reset distances for the next minute
             scoreUpdateCount = 0;
         }
@@ -344,7 +389,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var distance = Math.sqrt(dx * dx + dy * dy);
 
         // If distance is less than or equal to the radius of the circle, change color
-        if (distance <= 10) {
+        if (distance <= 30) {
             worm.currentColor = 'red'; // Change to red when hovering
         } else {
             worm.currentColor = targetColor; // Revert to original color
